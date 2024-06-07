@@ -2,7 +2,32 @@ import datetime
 import random
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from . import models
+
+def book_detail_view(request, id):
+    if request.method == 'GET':
+        bl_id = get_object_or_404(models.book, id=id)
+        return render(
+            request,
+            template_name='book/book_detail.html',
+            context={
+                'book_id': bl_id,
+            }
+        )
+
+def book_list_view(request):
+    if request.method == 'GET':
+        queryset = models.Book_list.objects.filter().order_by('-id')
+        return render(
+            request,
+            template_name='book/book_list.html',
+            context={
+                'bl': queryset
+            }
+        )
+
+
 
 def myself_view(request):
     if request.method == 'GET':
