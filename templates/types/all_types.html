@@ -1,0 +1,16 @@
+<button><a href="/kids/">Детские</a></button>
+<ol>
+  {% for type in types %}
+  <li>
+    <h1>{{type.title}}</h1>
+    <p>{{type.price}}</p>
+
+    {% for tag in type.tags.all %}
+    <p>
+      #{{tag.name}}
+    </p>
+    {% endfor %}
+
+  </li>
+  {% endfor %}
+</ol>

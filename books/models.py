@@ -1,6 +1,22 @@
 from django.db import models
+from django.db.models import CASCADE
 
-# Create your models here.
+
+class Tag(models.Model):
+    name = models.CharField(max_length=120)
+
+    def __str__(self):
+        return self.name
+
+class Types(models.Model):
+    title = models.CharField(max_length=120)
+    description = models.TextField(blank=True)
+    price = models.PositiveIntegerField(default=110)
+    tags = models.ManyToManyField(Tag)
+
+    def __str__(self):
+        return self.title
+
 class Book_list(models.Model):
 
     objects = None
@@ -14,7 +30,7 @@ class Book_list(models.Model):
     )
 
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='book_images/')
     about_book = models.TextField()
     genre_type = models.CharField(null=True, max_length=20, choices=GENRE_TYPE)
     date_of_creation = models.DateField()
@@ -28,3 +44,13 @@ class Book_list(models.Model):
     class Meta:
         verbose_name = 'Книгу'
         verbose_name_plural = 'Книги'
+
+class ReviewsBooks(models.Model):
+    review_book = models.ForeignKey(Book_list, on_delete=CASCADE,
+                                    related_name='reviews_books')
+    text = models.TextField()
+    points = models.PositiveIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.points} - {self.review_book}'

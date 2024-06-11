@@ -1,0 +1,11 @@
+<ol>
+  {% for type in kids_tags %}
+  <li>
+    <h1>{{ type.title }}</h1>
+    <p>{{ type.price }}</p>
+    {% for tag in type.tags.all %}
+    <p>#{{ tag.name }}</p>
+    {% endfor %}
+  </li>
+  {% endfor %}
+</ol>

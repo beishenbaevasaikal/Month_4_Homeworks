@@ -5,25 +5,44 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from . import models
 
+def kids_tags_view(request):
+    if request.method == 'GET':
+        kids_tags = models.Types.objects.filter(tags__name='Детские книги').order_by('-id')
+        return render(request,
+                      template_name='types/kids_tags.html',
+                      context={'kids_tags': kids_tags}
+                      )
+
+def all_types(request):
+    if request.method == 'GET':
+        types = models.Types.objects.filter().order_by('-id')
+        return render(
+            request,
+            template_name='types/all_types.html',
+            context={
+                'types': types
+            }
+        )
+
 def book_detail_view(request, id):
     if request.method == 'GET':
-        bl_id = get_object_or_404(models.book, id=id)
+        book_id = get_object_or_404(models.Book_list, id=id)
         return render(
             request,
             template_name='book/book_detail.html',
             context={
-                'book_id': bl_id,
+                'book_id': book_id,
             }
         )
 
 def book_list_view(request):
     if request.method == 'GET':
-        queryset = models.Book_list.objects.filter().order_by('-id')
+        queryset = models.Book_list.objects.all().order_by('-id')
         return render(
             request,
             template_name='book/book_list.html',
             context={
-                'bl': queryset
+                'book_list': queryset
             }
         )
 
