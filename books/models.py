@@ -29,12 +29,12 @@ class Book_list(models.Model):
         ('Romance', 'Romance'),
     )
 
-    name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='book_images/')
-    about_book = models.TextField()
-    genre_type = models.CharField(null=True, max_length=20, choices=GENRE_TYPE)
-    date_of_creation = models.DateField()
-    link_to_book = models.URLField()
+    name = models.CharField(max_length=100, verbose_name="Название книги", null=True)
+    image = models.ImageField(upload_to='book_images/', verbose_name="Загрузите обложку книги", null=True)
+    about_book = models.TextField(verbose_name="О чем книга", null=True)
+    genre_type = models.CharField(null=True, max_length=20, choices=GENRE_TYPE, verbose_name="Какой жанр")
+    date_of_creation = models.DateField(verbose_name="Дата создания книги", null=True)
+    link_to_book = models.URLField(verbose_name="Прикрепите ссылку", null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 

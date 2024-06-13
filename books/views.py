@@ -3,7 +3,45 @@ import random
 
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from . import models
+from . import models, forms
+
+def edit_books_view(request, id):
+    book_id = get_object_or_404(models.Book_list, id=id)
+    if request.method == 'POST':
+        form = forms.BooksForm(request.POST, instance=book_id)
+        form.save()
+        return HttpResponse('<h3>Book successfully edited!</h3>'
+                            '<a href="/book/">Список книг</a>')
+    else:
+        form = forms.BooksForm(instance=book_id)
+        return render(
+            request,
+            template_name='book/edit_books.html',
+            context={'form': form,
+                     'book_id': book_id
+            }
+        )
+
+def drop_books_view(request, id):
+    book_id = get_object_or_404(models.Book_list, id=id)
+    book_id.delete()
+    return HttpResponse('<h3>Book Deleted</h3>'
+                        '<a href="/book/">Список книг</a>')
+
+def create_book_view(request):
+    if request.method == 'POST':
+        form = forms.BooksForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('<h3> Book Created! </h3>'
+                                '<a href="/book/">Список книг</a>')
+    else:
+        form = forms.BooksForm()
+        return render(
+            request,
+            template_name='book/create_books.html',
+            context={'form': form}
+        )
 
 def kids_tags_view(request):
     if request.method == 'GET':
@@ -12,6 +50,25 @@ def kids_tags_view(request):
                       template_name='types/kids_tags.html',
                       context={'kids_tags': kids_tags}
                       )
+
+def fairy_tale_tags_view(request):
+    if request.method == 'GET':
+        fairy_tale_tags = models.Types.objects.filter(tags__name='Сказки').order_by('-id')
+        return render(
+            request,
+            template_name='types/fairy_tale_tags.html',
+            context={'fairy_tale_tags': fairy_tale_tags}
+        )
+
+def love_story_tags_view(request):
+    if request.method == 'GET':
+        love_story_tags = models.Types.objects.filter(tags__name='Любовная литература').order_by('-id')
+        return render(
+            request,
+            template_name='types/love_story_tags.html',
+            context={'love_story_tags': love_story_tags}
+        )
+
 
 def all_types(request):
     if request.method == 'GET':
