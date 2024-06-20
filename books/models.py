@@ -19,7 +19,7 @@ class Types(models.Model):
 
 class Book_list(models.Model):
 
-    objects = None
+
     GENRE_TYPE = (
         ('Poem', 'Poem'),
         ('Comedy', 'Comedy'),

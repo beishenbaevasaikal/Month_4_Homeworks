@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Главная</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'book_list' %}">Главная</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Рекомендуемые</a>
@@ -25,9 +25,10 @@
           <a class="nav-link" href="#">Цена</a>
         </li>
       </ul>
-      <span class="navbar-text">
-        Навбар текст с инлайновым элементом
-      </span>
+      <form action="{% url 'search_book' %}" method="GET" class="d-flex" role="search>">
+        <input class="form-control me-2" name="q" type="text" type="search" placeholder="Поиск" aria-label="Поиск">
+        <button class="btn btn-outline-success" type="submit">Поиск</button>
+      </form>
     </div>
   </div>
 </nav>
