@@ -8,18 +8,42 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='ProfileUser',
+            name="ProfileUser",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('phone_number', models.CharField(default='+996', max_length=14)),
-                ('age', models.PositiveIntegerField(default=18, validators=[django.core.validators.MaxValueValidator(90), django.core.validators.MinValueValidator(5)])),
-                ('gender', models.CharField(choices=[('Male', 'Male'), ('Female', 'Female')], max_length=100)),
-                ('club', models.CharField(default='Категория не определена', max_length=20)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("phone_number", models.CharField(default="+996", max_length=14)),
+                (
+                    "age",
+                    models.PositiveIntegerField(
+                        default=18,
+                        validators=[
+                            django.core.validators.MaxValueValidator(90),
+                            django.core.validators.MinValueValidator(5),
+                        ],
+                    ),
+                ),
+                (
+                    "gender",
+                    models.CharField(
+                        choices=[("Male", "Male"), ("Female", "Female")], max_length=100
+                    ),
+                ),
+                (
+                    "club",
+                    models.CharField(default="Категория не определена", max_length=20),
+                ),
             ],
         ),
     ]

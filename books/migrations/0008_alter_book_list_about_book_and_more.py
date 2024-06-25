@@ -6,38 +6,56 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('books', '0007_tag_types'),
+        ("books", "0007_tag_types"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='book_list',
-            name='about_book',
-            field=models.TextField(null=True, verbose_name='О чем книга'),
+            model_name="book_list",
+            name="about_book",
+            field=models.TextField(null=True, verbose_name="О чем книга"),
         ),
         migrations.AlterField(
-            model_name='book_list',
-            name='date_of_creation',
-            field=models.DateField(null=True, verbose_name='Дата создания книги'),
+            model_name="book_list",
+            name="date_of_creation",
+            field=models.DateField(null=True, verbose_name="Дата создания книги"),
         ),
         migrations.AlterField(
-            model_name='book_list',
-            name='genre_type',
-            field=models.CharField(choices=[('Poem', 'Poem'), ('Comedy', 'Comedy'), ('Fantasy', 'Fantasy'), ('Epos', 'Epos'), ('Thriller', 'Thriller'), ('Romance', 'Romance')], max_length=20, null=True, verbose_name='Какой жанр'),
+            model_name="book_list",
+            name="genre_type",
+            field=models.CharField(
+                choices=[
+                    ("Poem", "Poem"),
+                    ("Comedy", "Comedy"),
+                    ("Fantasy", "Fantasy"),
+                    ("Epos", "Epos"),
+                    ("Thriller", "Thriller"),
+                    ("Romance", "Romance"),
+                ],
+                max_length=20,
+                null=True,
+                verbose_name="Какой жанр",
+            ),
         ),
         migrations.AlterField(
-            model_name='book_list',
-            name='image',
-            field=models.ImageField(null=True, upload_to='book_images/', verbose_name='Загрузите обложку книги'),
+            model_name="book_list",
+            name="image",
+            field=models.ImageField(
+                null=True,
+                upload_to="book_images/",
+                verbose_name="Загрузите обложку книги",
+            ),
         ),
         migrations.AlterField(
-            model_name='book_list',
-            name='link_to_book',
-            field=models.URLField(null=True, verbose_name='Прикрепите ссылку'),
+            model_name="book_list",
+            name="link_to_book",
+            field=models.URLField(null=True, verbose_name="Прикрепите ссылку"),
         ),
         migrations.AlterField(
-            model_name='book_list',
-            name='name',
-            field=models.CharField(max_length=100, null=True, verbose_name='Название книги'),
+            model_name="book_list",
+            name="name",
+            field=models.CharField(
+                max_length=100, null=True, verbose_name="Название книги"
+            ),
         ),
     ]
