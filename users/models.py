@@ -4,7 +4,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-class ProfileUser(models.Model):
+class ProfileUser(User):
     GENDER_CHOICES = (
         ('Male', 'Male'),
         ('Female', 'Female')
